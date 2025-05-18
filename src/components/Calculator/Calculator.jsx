@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { evaluate } from "mathjs";
 import {
   Wrapper,
@@ -14,7 +14,17 @@ import {
 
 function Calculator() {
   const [input, setInput] = useState("");
-  const [history, setHistory] = useState([]); // przechowuje historię działań
+
+  // przechowuje historię działań + wczytaj historię z localStorage przy starcie
+  const [history, setHistory] = useState(() => {
+    const stored = localStorage.getItem("calc-history");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  // zapisuj historię do localStorage gdy się zmienia
+  useEffect(() => {
+    localStorage.setItem("calc-history", JSON.stringify(history));
+  }, [history]);
 
   const clearHistory = () => {
     const confirmClear = window.confirm(
