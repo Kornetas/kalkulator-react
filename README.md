@@ -1,12 +1,42 @@
-# React + Vite
+# 🔢 Kalkulator – React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projekt prostego, ale rozbudowanego kalkulatora stworzonego w React, stylowanego za pomocą styled-components i wyposażonego w historię obliczeń oraz efekty dźwiękowe.
 
-Currently, two official plugins are available:
+🔗 **Zobacz działającą wersję online**:  
+👉 [https://kornetas.github.io/kalkulator-react](https://kornetas.github.io/kalkulator-react)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🧠 Funkcje
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Dodawanie, odejmowanie, mnożenie, dzielenie
+- Zaawansowane operacje: pierwiastki, potęgi, nawiasy, zmiana znaku
+- Obsługa procentów
+- Przycisk `C` (czyści pole), `⌫` (backspace)
+- Wyświetlanie historii działań z możliwością kliknięcia
+- Zapisywanie historii do `localStorage`
+- Efekty dźwiękowe (`.mp3`) dla różnych przycisków
+- Responsywny i dopracowany interfejs
+- Tło z obrazkiem (z folderu `/public`)
+- Dynamiczny `font-size` w zależności od długości działania
+- Obsługa przycisków specjalnych (`$special`)
+
+---
+
+## 🛠 Technologie
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Styled-components](https://styled-components.com/)
+- [Math.js](https://mathjs.org/) – bezpieczna ocena działań
+
+---
+
+## ▶️ Uruchomienie projektu lokalnie
+
+```bash
+git clone https://github.com/Kornetas/kalkulator-react.git
+cd password-generator
+npm install
+npm run dev
+```
