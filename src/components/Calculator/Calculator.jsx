@@ -9,12 +9,21 @@ import {
   HistoryTitle,
   HistoryList,
   HistoryItem,
+  ClearHistoryButton,
 } from "./Calculator.styles";
 
 function Calculator() {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]); // przechowuje historię działań
 
+  const clearHistory = () => {
+    const confirmClear = window.confirm(
+      "Czy na pewno chcesz wyczyścić historię?"
+    );
+    if (confirmClear) {
+      setHistory([]);
+    }
+  };
   // Obsługa kliknięcia przycisku (cyfra, operator)
   const handleClick = (value) => {
     setInput((prev) => prev + value);
@@ -109,6 +118,10 @@ function Calculator() {
         <Button onClick={handleEvaluate}>=</Button>
         <Button onClick={() => handleClick("+")}>+</Button>
       </ButtonGrid>
+
+      <ClearHistoryButton onClick={clearHistory}>
+        🧹 Wyczyść historię
+      </ClearHistoryButton>
 
       <HistoryWrapper>
         <HistoryTitle>Historia:</HistoryTitle>

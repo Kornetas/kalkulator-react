@@ -62,3 +62,18 @@ export const HistoryItem = styled.li`
     color: #000;
   }
 `;
+
+export const ClearHistoryButton = styled.button`
+  margin-top: 20px;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #e0e0e0;
+  }
+`;
