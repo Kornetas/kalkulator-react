@@ -11,6 +11,13 @@ import {
   HistoryItem,
   ClearHistoryButton,
 } from "./Calculator.styles";
+// Załaduj dźwięki
+const soundMap = {
+  default: new Audio("/sound1.mp3"),
+  digits: new Audio("/sound.mp3"),
+  equals: new Audio("/=.mp3"),
+  clear: new Audio("/C.mp3"),
+};
 
 function Calculator() {
   const [input, setInput] = useState("");
@@ -95,47 +102,243 @@ function Calculator() {
     return "2rem"; // domyślna wartość
   };
 
+  // funkcja do odtwarzania dźwięku na podstawie przycisku
+  const playSoundForKey = (key) => {
+    const digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const equals = ["="];
+    const clear = ["C"];
+
+    let sound;
+
+    if (digits.includes(key)) {
+      sound = soundMap.digits;
+    } else if (equals.includes(key)) {
+      sound = soundMap.equals;
+    } else if (clear.includes(key)) {
+      sound = soundMap.clear;
+    } else {
+      sound = soundMap.default;
+    }
+
+    try {
+      sound.currentTime = 0;
+      sound.play();
+    } catch (err) {
+      console.warn(
+        `Nie udało się odtworzyć dźwięku dla klawisza "${key}"`,
+        err
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <Display fontSize={getFontSize()}>{input || "0"}</Display>
 
       <ButtonGrid>
         {/* Rząd 1 */}
-
-        <Button onClick={handlePercent}>%</Button>
-        <Button onClick={() => handleClick("/")}>/</Button>
-        <Button onClick={handleClear}>C</Button>
-        <Button onClick={handleBackspace}>←</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("%");
+            handlePercent();
+          }}
+        >
+          %
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("/");
+            handleClick("/");
+          }}
+        >
+          /
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("C");
+            handleClear();
+          }}
+        >
+          C
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("←");
+            handleBackspace();
+          }}
+        >
+          ←
+        </Button>
 
         {/* Rząd 2 – Nowe funkcje */}
-        <Button onClick={() => handleClick("sqrt(")}>√</Button>
-        <Button onClick={() => handleClick("^2")}>x²</Button>
-        <Button onClick={handleToggleSign}>+/-</Button>
-        <Button onClick={() => handleClick("(")}>(</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("√");
+            handleClick("sqrt(");
+          }}
+        >
+          √
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("^2");
+            handleClick("^2");
+          }}
+        >
+          x²
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("+/-");
+            handleToggleSign();
+          }}
+        >
+          +/-
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("(");
+            handleClick("(");
+          }}
+        >
+          (
+        </Button>
 
         {/* Rząd 3 */}
-        <Button onClick={() => handleClick("7")}>7</Button>
-        <Button onClick={() => handleClick("8")}>8</Button>
-        <Button onClick={() => handleClick("9")}>9</Button>
-        <Button onClick={() => handleClick(")")}>)</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("7");
+            handleClick("7");
+          }}
+        >
+          7
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("8");
+            handleClick("8");
+          }}
+        >
+          8
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("9");
+            handleClick("9");
+          }}
+        >
+          9
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey(")");
+            handleClick(")");
+          }}
+        >
+          )
+        </Button>
 
         {/* Rząd 4 */}
-        <Button onClick={() => handleClick("4")}>4</Button>
-        <Button onClick={() => handleClick("5")}>5</Button>
-        <Button onClick={() => handleClick("6")}>6</Button>
-        <Button onClick={() => handleClick("*")}>*</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("4");
+            handleClick("4");
+          }}
+        >
+          4
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("5");
+            handleClick("5");
+          }}
+        >
+          5
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("6");
+            handleClick("6");
+          }}
+        >
+          6
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("*");
+            handleClick("*");
+          }}
+        >
+          *
+        </Button>
 
         {/* Rząd 5 */}
-        <Button onClick={() => handleClick("1")}>1</Button>
-        <Button onClick={() => handleClick("2")}>2</Button>
-        <Button onClick={() => handleClick("3")}>3</Button>
-        <Button onClick={() => handleClick("-")}>-</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("1");
+            handleClick("1");
+          }}
+        >
+          1
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("2");
+            handleClick("2");
+          }}
+        >
+          2
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("3");
+            handleClick("3");
+          }}
+        >
+          3
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("-");
+            handleClick("-");
+          }}
+        >
+          -
+        </Button>
 
         {/* Rząd 6 */}
-        <Button onClick={() => handleClick("0")}>0</Button>
-        <Button onClick={() => handleClick(".")}>.</Button>
-        <Button onClick={handleEvaluate}>=</Button>
-        <Button onClick={() => handleClick("+")}>+</Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("0");
+            handleClick("0");
+          }}
+        >
+          0
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey(".");
+            handleClick(".");
+          }}
+        >
+          .
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("=");
+            handleEvaluate();
+          }}
+        >
+          =
+        </Button>
+        <Button
+          onClick={() => {
+            playSoundForKey("+");
+            handleClick("+");
+          }}
+        >
+          +
+        </Button>
       </ButtonGrid>
 
       <ClearHistoryButton onClick={clearHistory}>
