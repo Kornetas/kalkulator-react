@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { evaluate } from "mathjs";
-import { Wrapper, Display, ButtonGrid, Button } from "./Calculator.styles";
+import {
+  Wrapper,
+  Display,
+  ButtonGrid,
+  Button,
+  HistoryWrapper,
+  HistoryTitle,
+  HistoryList,
+  HistoryItem,
+} from "./Calculator.styles";
 
 function Calculator() {
   const [input, setInput] = useState("");
+  const [history, setHistory] = useState([]); // przechowuje historię działań
 
   // Obsługa kliknięcia przycisku (cyfra, operator)
   const handleClick = (value) => {
@@ -14,6 +24,11 @@ function Calculator() {
   const handleEvaluate = () => {
     try {
       const result = evaluate(input);
+      // Dodaj do historii (nowy obiekt: wyrażenie i wynik)
+      setHistory((prevHistory) => [
+        { expression: input, result: result.toString() },
+        ...prevHistory,
+      ]);
       setInput(result.toString());
     } catch (error) {
       console.error("Błąd w działaniu:", error);
@@ -94,6 +109,21 @@ function Calculator() {
         <Button onClick={handleEvaluate}>=</Button>
         <Button onClick={() => handleClick("+")}>+</Button>
       </ButtonGrid>
+
+      <HistoryWrapper>
+        <HistoryTitle>Historia:</HistoryTitle>
+        <HistoryList>
+          {history.map((item, index) => (
+            <HistoryItem
+              key={index}
+              onClick={() => setInput(item.expression)}
+              title="Kliknij, aby ponownie użyć"
+            >
+              {item.expression} = <strong>{item.result}</strong>
+            </HistoryItem>
+          ))}
+        </HistoryList>
+      </HistoryWrapper>
     </Wrapper>
   );
 }

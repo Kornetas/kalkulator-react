@@ -34,3 +34,31 @@ export const Button = styled.button`
     background: #e0e0e0;
   }
 `;
+
+export const HistoryWrapper = styled.div`
+  margin-top: 20px;
+  padding: 10px;
+`;
+export const HistoryTitle = styled.h4`
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+`;
+export const HistoryList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+export const HistoryItem = styled.li`
+  font-family: monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 5px;
+  color: #444;
+
+  &:hover {
+    text-decoration: underline;
+    color: #000;
+  }
+`;
