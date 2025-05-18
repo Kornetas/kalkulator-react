@@ -1,25 +1,54 @@
 import React, { useState } from "react";
+import { evaluate } from "mathjs";
 import { Wrapper, Display, ButtonGrid, Button } from "./Calculator.styles";
 
 function Calculator() {
-  // przechowuje to, co widzimy na ekranie kalkulatora
   const [input, setInput] = useState("");
 
-  // obsługa kliknięcia przycisku
+  // Obsługa kliknięcia przycisku (cyfra, operator)
   const handleClick = (value) => {
-    console.log("Kliknięto:", value); // debug
     setInput((prev) => prev + value);
   };
+
+  // Obsługa przycisku "="
+  const handleEvaluate = () => {
+    try {
+      const result = evaluate(input);
+      setInput(result.toString());
+    } catch (error) {
+      console.error("Błąd w działaniu:", error);
+      setInput("Error");
+    }
+  };
+
+  // Usuwanie ostatniego znaku ←
+  const handleBackspace = () => {
+    setInput((prev) => prev.slice(0, -1));
+  };
+
+  // Obsługa procenta: np. 50 → 0.5
+  const handlePercent = () => {
+    try {
+      const result = evaluate(input) / 100;
+      setInput(result.toString());
+    } catch {
+      setInput("Error");
+    }
+  };
+
+  // Reset (C)
+  const handleClear = () => {
+    setInput("");
+  };
+
   return (
     <Wrapper>
-      {/* Wyświetlacz pokazuje aktualny input */}
       <Display>{input || "0"}</Display>
 
       <ButtonGrid>
-        {/* Każdy przycisk wywołuje handleClick z wartością */}
-        <Button onClick={() => setInput("")}>C</Button>
-        <Button onClick={() => {}}>←</Button>
-        <Button onClick={() => handleClick("%")}>%</Button>
+        <Button onClick={handleClear}>C</Button>
+        <Button onClick={handleBackspace}>←</Button>
+        <Button onClick={handlePercent}>%</Button>
         <Button onClick={() => handleClick("/")}>/</Button>
 
         <Button onClick={() => handleClick("7")}>7</Button>
@@ -39,7 +68,7 @@ function Calculator() {
 
         <Button onClick={() => handleClick("0")}>0</Button>
         <Button onClick={() => handleClick(".")}>.</Button>
-        <Button onClick={() => {}}>=</Button>
+        <Button onClick={handleEvaluate}>=</Button>
       </ButtonGrid>
     </Wrapper>
   );
