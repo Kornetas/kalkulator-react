@@ -13,10 +13,10 @@ import {
 } from "./Calculator.styles";
 // Załaduj dźwięki
 const soundMap = {
-  default: new Audio("/sound1.mp3"),
-  digits: new Audio("/sound.mp3"),
-  equals: new Audio("/=.mp3"),
-  clear: new Audio("/C.mp3"),
+  digits: new Audio(`${import.meta.env.BASE_URL}sound.mp3`),
+  default: new Audio(`${import.meta.env.BASE_URL}sound1.mp3`),
+  equals: new Audio(`${import.meta.env.BASE_URL}=.mp3`),
+  clear: new Audio(`${import.meta.env.BASE_URL}C.mp3`),
 };
 
 function Calculator() {
