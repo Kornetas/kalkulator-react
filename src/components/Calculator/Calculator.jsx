@@ -49,6 +49,7 @@ function Calculator() {
   // Obsługa przycisku "="
   const handleEvaluate = () => {
     try {
+      if (!input.trim()) return;
       const result = evaluate(input);
       // Dodaj do historii (nowy obiekt: wyrażenie i wynik)
       setHistory((prevHistory) => [
@@ -138,6 +139,7 @@ function Calculator() {
       <ButtonGrid>
         {/* Rząd 1 */}
         <Button
+          $special="func"
           onClick={() => {
             playSoundForKey("%");
             handlePercent();
@@ -146,14 +148,17 @@ function Calculator() {
           %
         </Button>
         <Button
+          $special="func"
           onClick={() => {
-            playSoundForKey("/");
-            handleClick("/");
+            playSoundForKey("+/-");
+            handleToggleSign();
           }}
         >
-          /
+          +/-
         </Button>
+
         <Button
+          $special="clear"
           onClick={() => {
             playSoundForKey("C");
             handleClear();
@@ -162,16 +167,19 @@ function Calculator() {
           C
         </Button>
         <Button
+          $special="back"
           onClick={() => {
             playSoundForKey("←");
             handleBackspace();
           }}
+          title="Backspace"
         >
-          ←
+          ⌫
         </Button>
 
-        {/* Rząd 2 – Nowe funkcje */}
+        {/* Rząd 2 */}
         <Button
+          $special="func"
           onClick={() => {
             playSoundForKey("√");
             handleClick("sqrt(");
@@ -180,6 +188,7 @@ function Calculator() {
           √
         </Button>
         <Button
+          $special="func"
           onClick={() => {
             playSoundForKey("^2");
             handleClick("^2");
@@ -188,20 +197,22 @@ function Calculator() {
           x²
         </Button>
         <Button
-          onClick={() => {
-            playSoundForKey("+/-");
-            handleToggleSign();
-          }}
-        >
-          +/-
-        </Button>
-        <Button
+          $special="func"
           onClick={() => {
             playSoundForKey("(");
             handleClick("(");
           }}
         >
           (
+        </Button>
+        <Button
+          $special="func"
+          onClick={() => {
+            playSoundForKey(")");
+            handleClick(")");
+          }}
+        >
+          )
         </Button>
 
         {/* Rząd 3 */}
@@ -230,12 +241,13 @@ function Calculator() {
           9
         </Button>
         <Button
+          $special="operator"
           onClick={() => {
-            playSoundForKey(")");
-            handleClick(")");
+            playSoundForKey("/");
+            handleClick("/");
           }}
         >
-          )
+          /
         </Button>
 
         {/* Rząd 4 */}
@@ -264,6 +276,7 @@ function Calculator() {
           6
         </Button>
         <Button
+          $special="operator"
           onClick={() => {
             playSoundForKey("*");
             handleClick("*");
@@ -298,6 +311,7 @@ function Calculator() {
           3
         </Button>
         <Button
+          $special="operator"
           onClick={() => {
             playSoundForKey("-");
             handleClick("-");
@@ -316,6 +330,7 @@ function Calculator() {
           0
         </Button>
         <Button
+          $special="operator"
           onClick={() => {
             playSoundForKey(".");
             handleClick(".");
@@ -324,6 +339,7 @@ function Calculator() {
           .
         </Button>
         <Button
+          $special="equals"
           onClick={() => {
             playSoundForKey("=");
             handleEvaluate();
@@ -332,6 +348,7 @@ function Calculator() {
           =
         </Button>
         <Button
+          $special="operator"
           onClick={() => {
             playSoundForKey("+");
             handleClick("+");
