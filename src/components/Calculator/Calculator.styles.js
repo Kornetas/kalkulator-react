@@ -13,8 +13,10 @@ export const Display = styled.div`
   background: #111;
   color: #0f0;
   padding: 20px;
-  font-size: 2rem;
   text-align: right;
+  font-size: ${({ fontSize }) => fontSize || "2rem"};
+  overflow-x: auto;
+  white-space: nowrap;
 `;
 
 export const ButtonGrid = styled.div`

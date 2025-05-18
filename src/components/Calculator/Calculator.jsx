@@ -76,9 +76,18 @@ function Calculator() {
     setInput("");
   };
 
+  // Dynamiczne skalowanie font-size
+  const getFontSize = () => {
+    const length = input.length;
+    if (length > 20) return "1rem";
+    if (length > 15) return "1.3rem";
+    if (length > 10) return "1.6rem";
+    return "2rem"; // domyślna wartość
+  };
+
   return (
     <Wrapper>
-      <Display>{input || "0"}</Display>
+      <Display fontSize={getFontSize()}>{input || "0"}</Display>
 
       <ButtonGrid>
         {/* Rząd 1 */}
