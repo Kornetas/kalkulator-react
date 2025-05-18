@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   font-family: "Courier New", monospace;
+  background: rgba(255, 255, 255, 0.85); /* półprzezroczyste tło kalkulatora */
+  backdrop-filter: blur(4px);
+  position: relative;
+  z-index: 1;
 `;
 
 export const Display = styled.div`
